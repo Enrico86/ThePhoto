@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:search="clr-namespace:ThePhoto.Search"
+             x:Class="ThePhoto.Views.SearchView">
+
+    <Shell.SearchHandler>
+        <search:PhotosSearchHandler Placeholder="Choose a topic"
+                                    ShowsResults="True"
+                                    DisplayMemberName="Title">
+        </search:PhotosSearchHandler>
+    </Shell.SearchHandler>
+    <ListView ItemsSource="{Binding PhotosList}"
+              RowHeight="250">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame Margin="15"
+                           Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".8*"></RowDefinition>
+                                <RowDefinition Height=".2*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Url}"
+                                   Aspect="AspectFill"></Image>
+                            <StackLayout Grid.Row="1"
+                                         Orientation="Horizontal"
+                                         Margin="20,0,0,0">
+                                <Image Source="like.png"
+                                       HeightRequest="25"></Image>
+                                <Label Text="{Binding Likes}"
+                                       VerticalTextAlignment="Center"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+
+</ContentPage>

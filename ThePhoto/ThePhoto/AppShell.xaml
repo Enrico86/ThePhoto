@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:food="clr-namespace:ThePhoto.Views.Food"
+       xmlns:views="clr-namespace:ThePhoto.Views"
+       xmlns:places="clr-namespace:ThePhoto.Views.Places"
+       mc:Ignorable="d"
+       x:Class="ThePhoto.AppShell"
+       FlyoutIcon="menu.png"
+       FlyoutHeaderBehavior="CollapseOnScroll">
+    <Shell.Resources>
+        <Style x:Key="BaseStyle" 
+               TargetType="Element">
+            <Setter Property="Shell.BackgroundColor" Value="#33333D"></Setter>
+            <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF"></Setter>
+            <Setter Property="Shell.ForegroundColor" Value="White"></Setter>
+            <Setter Property="Shell.TitleColor" Value="White"></Setter>
+            <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF"></Setter>
+        </Style>
+        <Style TargetType="FlyoutItem"
+               BasedOn="{StaticResource BaseStyle}"></Style>
+        <Style x:Key="FoodStyle" 
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+            <Setter Property="Shell.BackgroundColor" Value="DarkRed"></Setter>
+        </Style>
+        <Style x:Key="PastaStyle"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+            <Setter Property="Shell.BackgroundColor" Value="Gold"></Setter>
+        </Style>
+    </Shell.Resources>
+    <Shell.FlyoutHeader>
+        <views:FlyoutHeader></views:FlyoutHeader>
+    </Shell.FlyoutHeader>
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding FlyoutIcon}"
+                       HeightRequest="45"
+                       Margin="5"></Image>
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center"></Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="#D8D8DC">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding FlyoutIcon}"
+                       HeightRequest="45"
+                       Margin="5"></Image>
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center"></Label>
+            </Grid>            
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+    
+    <FlyoutItem Title="RandomItem"
+                Icon="random.png"
+                Route="random">
+        <Tab Title="Random"
+             Icon="random.png"
+             Route="randomTab">
+            <ShellContent Title="Random"
+                          Icon="random.png"
+                          Route="randomPage"
+                          ContentTemplate="{DataTemplate views:RandomPhotoView}"
+                          x:Name="randomView"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Food"
+                Icon="food.png"
+                Route="food"
+                FlyoutDisplayOptions="AsSingleItem"
+                Style="{StaticResource FoodStyle}">
+        <Tab Title="Meat"
+             Icon="meat.png"
+             Route="meat">
+            <ShellContent Title="Chicken"
+                          Icon="chicken.png"
+                          Route="chicken"
+                          ContentTemplate="{DataTemplate food:ChickenMeatView}"
+                          x:Name="chickenView">
+            </ShellContent>
+            <ShellContent Title="Beef"
+                          Icon="beef.png"
+                          Route="beef"
+                          ContentTemplate="{DataTemplate food:BeefMeatView}"
+                          x:Name="beefView">
+            </ShellContent>
+        </Tab>
+        <Tab Title="Pasta"
+             Icon="pasta.png"
+             Route="pastaTab"
+             Style="{StaticResource PastaStyle}">
+            <ShellContent Title="Pasta"
+                          Icon="pasta.png"
+                          Route="pastaPage"
+                          ContentTemplate="{DataTemplate food:PastaView}"
+                          x:Name="pastaView">
+            </ShellContent>
+        </Tab>
+        <Tab Title="Dessert"
+             Icon="dessert.png"
+             Route="dessert">
+            <ShellContent Title="Cake"
+                          Icon="cake.png"
+                          Route="cake"
+                          ContentTemplate="{DataTemplate food:CakeView}"
+                          x:Name="cakeView">
+            </ShellContent>
+            <ShellContent Title="Cookies"
+                          Icon="cookies.png"
+                          Route="cookies"
+                          ContentTemplate="{DataTemplate food:CookiesView}"
+                          x:Name="cookiesView">
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Places"
+                Icon="places.png"
+                FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="México"
+             Icon="mexico.png"
+             Route="mexico">
+            <ShellContent Title="Chiapas"
+                          Icon="chiapas.png"
+                          Route="chiapas"
+                          ContentTemplate="{DataTemplate places:ChiapasView}">
+            </ShellContent>
+            <ShellContent Title="Cancun"
+                          Icon="cancun.png"
+                          Route="cancun"
+                          ContentTemplate="{DataTemplate places:CancunView}">
+            </ShellContent>
+        </Tab>
+        <Tab Title="France"
+             Icon="france.png"
+             Route="france">
+            <ShellContent Title="Paris"
+                          Icon="paris.png"
+                          Route="paris"
+                          x:Name="parisView"
+                          ContentTemplate="{DataTemplate places:ParisView}">
+            </ShellContent>
+        </Tab>
+        <Tab Title="Egypt"
+             Icon="egypt.png">
+            <ShellContent Title="El Cairo"
+                          Icon="cairo.png"
+                          ContentTemplate="{DataTemplate places:CairoView}">
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Featured"
+                Icon="featured.png"
+                Route="featuredItem">
+        <Tab Title="Featured"
+             Icon="featured.png"
+             Route="featuredTab">
+            <ShellContent Title="Featured"
+                          Icon="featured.png"
+                          Route="featured"
+                          ContentTemplate="{DataTemplate views:FeaturedView}"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Search"
+                Icon="search.png"
+                Route="searchItem">
+        <Tab Route="searchTab">
+            <ShellContent Route="search"
+                          ContentTemplate="{DataTemplate views:SearchView}"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <MenuItem Text="Help"
+              IconImageSource="help.png"
+              Command="{Binding HelpCommand}">
+    </MenuItem>
+    <MenuItem Text="I'm feeling lucky"
+              IconImageSource="lucky.png"
+              Command="{Binding LuckyCommand}"></MenuItem>
+</Shell>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="ThePhoto.Views.FeaturedView">
+  
+
+    <ListView ItemsSource="{Binding FeaturedList}"
+              RowHeight="100">
+        <ListView.Behaviors>
+            <behaviorsPack:EventToCommandBehavior
+                Command="{Binding SelectedItemCommand}"
+                EventName="ItemTapped"
+                EventArgsPropertyPath="Item"></behaviorsPack:EventToCommandBehavior>
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".3*"></ColumnDefinition>
+                                <ColumnDefinition Width=".7*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Url}"
+                                   Aspect="AspectFit"
+                                   HeightRequest="50"></Image>
+                            <Grid Grid.Column="1">
+                                <StackLayout>
+                                    <Label Text="{Binding Title}"
+                                           Style="{StaticResource RobotoBold}"></Label>
+                                    <Label Text="{Binding Description}"></Label>
+                                </StackLayout>
+                                
+                                </Grid>
+                            </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThePhoto.Views.TemplateView"
+             Visual="Material">
+
+    <Grid BackgroundColor="#373740">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Frame Margin="15"
+               CornerRadius="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".8*"></RowDefinition>
+                    <RowDefinition Height=".2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Aspect="AspectFill"
+                       Source="{Binding Photo.Url}"
+                       Grid.RowSpan="2"/>
+                <Grid Grid.Row="1"
+                      Opacity=".7"
+                      BackgroundColor="Black"
+                      IsVisible="{Binding IsTitleVisible}">
+                    <Label Text="{Binding Photo.Title}"                                              
+                           TextColor="White"
+                           Margin="10"/>
+                </Grid>
+            </Grid>
+
+        </Frame>
+        <Button Grid.Row="1"
+                Text="Get Cool Image"
+                Command="{Binding GenerateCommand}"
+                Margin="15"/>
+    </Grid>
+
+</ContentView>
